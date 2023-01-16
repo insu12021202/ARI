@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import "../pages/MyPageOwner.css";
 import { useRecoilState } from "recoil";
 import { nameState } from "../state";
 import { customAxios } from "./customAxios";
 import Loading from "../components/Loading";
-import { IoIosArrowForward } from "react-icons/io";
+import { Container } from "../components/common/Container";
+import {
+  WelcomeCard,
+  MidCard,
+  SubInfo,
+} from "../components/store/MyPageOwnerStyle";
 
 const MyPageOwner = () => {
   const [name, setName] = useRecoilState(nameState);
@@ -63,66 +67,22 @@ const MyPageOwner = () => {
   return (
     <>
       <Header text="마이페이지" back={true} url="/"></Header>
-      <div className="container">
-        <div className="welcome-card">
-          <div style={{ marginLeft: "30px" }}>
-            <p
-              style={{
-                fontSize: "30px",
-                fontWeight: "700",
-                marginTop: "0",
-                marginBottom: "9px",
-              }}
-            >
-              {name}
-            </p>
-            <span style={{ fontSize: "18px" }}>사장님 안녕하세요!</span>
-          </div>
-        </div>
-        <div className="flex-align">
-          <div style={{ margin: "24px 0" }}>
-            <Link to="/partnership">
-              <div className="main-info">
-                <div style={{ textAlign: "center" }}>
-                  <p className="mid-card">협력형 제휴</p>
-                  <span style={{ fontSize: "20px" }}>{coopEventNum}</span>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div style={{ margin: "24px 0" }}>
-            <Link to="/storePrivateEventList">
-              <div className="main-info">
-                <div style={{ textAlign: "center" }}>
-                  <p className="mid-card">개인 이벤트</p>
-                  <span style={{ fontSize: "20px" }}>{privateEventNum}</span>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
+      <Container>
+        <WelcomeCard name={name} />
+        <MidCard
+          coopEventNum={coopEventNum}
+          privateEventNum={privateEventNum}
+        />
         {menu.map((item, index) => {
           return (
             <div style={{ marginBottom: "12px" }} key={index}>
               <Link to={item.url}>
-                <div className="sub-info">
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <p style={{ marginLeft: "28px" }}>{item.title}</p>
-                    {item.isNew === true ? (
-                      <span className="new">new</span>
-                    ) : null}
-                  </div>
-                  <IoIosArrowForward
-                    color="#959595"
-                    size="20"
-                    style={{ marginRight: "20px" }}
-                  />
-                </div>
+                <SubInfo title={item.title} isNew={item.isNew} />
               </Link>
             </div>
           );
         })}
-      </div>
+      </Container>
     </>
   );
 };

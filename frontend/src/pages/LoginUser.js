@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import MainButton from "../components/common/Mainbutton";
-import "./LoginUser.css";
 import Header from "../components/Header";
 import axios from "axios";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
+import { Logo } from "../components/common/Logo";
+import { Container } from "../components/common/Container";
+import { MainButton } from "../components/common/Button";
+import { Kakao, Naver } from "../components/login/LoginUserStyle";
 
 const LoginUser = () => {
   const [kakaoURL, setKakaoURL] = useState("");
@@ -38,36 +40,24 @@ const LoginUser = () => {
   return (
     <>
       <Header text="로그인/회원가입" back={true}></Header>
-      <div className="logoContainer"></div>
-
-      <div className="buttonContainer">
-        <div className="kakao" onClick={onKakao}>
+      <Logo />
+      <Container>
+        <Kakao onClick={onKakao}>
           <RiKakaoTalkFill size="20" style={{ marginRight: "7px" }} />
           <span>카카오로 로그인</span>
-        </div>
-        <div className="naver" onClick={onNaver}>
+        </Kakao>
+        <Naver onClick={onNaver}>
           <SiNaver size="17" style={{ marginRight: "8px" }} />
           <span>네이버로 로그인</span>
-        </div>
+        </Naver>
         <Link to="/login">
-          <MainButton
-            radius="15px"
-            color="#FFFFFF"
-            background="#4E514F"
-            text="이메일로 로그인"
-          />
+          <MainButton background="#4E514F">이메일로 로그인</MainButton>
         </Link>
-        <div style={{ marginTop: "240px" }}>
-          <Link to="/signupUser">
-            <MainButton
-              radius="15px"
-              color="#FFFFFF"
-              background="#4E514F"
-              text="이메일로 회원가입"
-            />
-          </Link>
-        </div>
-      </div>
+        <div style={{ marginTop: "240px" }}></div>
+        <Link to="/signupUser">
+          <MainButton background="#4E514F">이메일로 회원가입</MainButton>
+        </Link>
+      </Container>
     </>
   );
 };

@@ -1,19 +1,6 @@
-.logoContainer {
-  width: 97px;
-  height: 97px;
-  background-image: url("../../public/images/ari_logo_text.png");
-  background-size: cover;
-  background-position: center;
-  margin: 50px auto;
-}
+import styled from "styled-components";
 
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.kakao {
+const StyledKakao = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,9 +11,13 @@
   border-radius: 15px;
   margin-bottom: 11px;
   cursor: pointer;
+`;
+
+function Kakao({ children, ...rest }) {
+  return <StyledKakao {...rest}>{children}</StyledKakao>;
 }
 
-.naver {
+const StyledNaver = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,4 +28,10 @@
   border-radius: 15px;
   margin-bottom: 11px;
   cursor: pointer;
+`;
+
+function Naver({ children, ...rest }) {
+  return <StyledNaver {...rest}>{children}</StyledNaver>;
 }
+
+export { Kakao, Naver };

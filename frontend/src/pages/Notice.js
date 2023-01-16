@@ -4,8 +4,17 @@ import { useRecoilState } from "recoil";
 import Header from "../components/Header";
 import { authState } from "../state";
 import { customAxios } from "./customAxios";
-import "./Notice.css";
 import Loading from "../components/Loading";
+import {
+  Container,
+  Banner,
+  ArticlesContainer,
+  Article,
+  Title,
+  Date,
+  BtnContainer,
+  WriteBtn,
+} from "../components/notice/NoticeStyle";
 
 const Notice = () => {
   const [data, setData] = useState();
@@ -30,42 +39,34 @@ const Notice = () => {
     return (
       <>
         <Header text="공지사항" back={true}></Header>
-        <div className="noticeContainer">
-          <div
-            className="noticeBanner"
+        <Container>
+          <Banner
             onClick={() => {
               window.open(
                 "https://sky-drive-16d.notion.site/ARI-94ad2e39504046a3ac11ee5fb2f33382",
                 "_blank"
               );
             }}
-          ></div>
-
-          <div className="noticeArticlesContainer">
+          />
+          <ArticlesContainer>
             {data &&
               data.map((item, index) => {
                 return (
-                  <div className="noticeArticle" key={index}>
-                    <span
-                      className="noticeTitle"
-                      onClick={onClick}
-                      data-key={item.id}
-                    >
+                  <Article key={index}>
+                    <Title onClick={onClick} data-key={item.id}>
                       {item.title}
-                    </span>
-                    <span className="noticeDate">{item.createDate}</span>
-                  </div>
+                    </Title>
+                    <Date>{item.createDate}</Date>
+                  </Article>
                 );
               })}
-          </div>
+          </ArticlesContainer>
           {auth === 3 && (
-            <div className="btnContainer">
-              <button className="noticeWriteBtn" onClick={moveToWrite}>
-                글쓰기
-              </button>
-            </div>
+            <BtnContainer>
+              <WriteBtn onClick={moveToWrite}>글쓰기</WriteBtn>
+            </BtnContainer>
           )}
-        </div>
+        </Container>
       </>
     );
   }

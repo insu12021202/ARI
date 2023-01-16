@@ -2,7 +2,17 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import "./NoticeWrite.css";
+import {
+  Container,
+  WriteHeader,
+  TitleTag,
+  ContentTag,
+  TitleInput,
+  ContentBox,
+  ContentInput,
+  BtnBox,
+  CompleteBtn,
+} from "../components/notice/NoticeWriteStyle";
 
 const NoticeWrite = () => {
   //기능 완성 후 관리자 권한 확인 필요함
@@ -36,31 +46,27 @@ const NoticeWrite = () => {
   return (
     <>
       <Header text="공지사항" back={true}></Header>
-      <div className="noticeWriteContainer">
-        <div className="noticeWriteHeader">
-          <span className="noticeTitleTag">공지 제목</span>
-          <input
-            className="noticeTitleInput"
+      <Container>
+        <WriteHeader>
+          <TitleTag>공지 제목</TitleTag>
+          <TitleInput
             placeholder="제목을 입력해주세요"
             value={title || ""}
             onChange={onChangeTitle}
-          ></input>
-        </div>
-        <div className="noticeWriteContentBox">
-          <span className="noticeWriteContentTag">공지 내용</span>
-          <textarea
-            className="noticeWriteContentInput"
+          />
+        </WriteHeader>
+        <ContentBox>
+          <ContentTag>공지 내용</ContentTag>
+          <ContentInput
             placeholder="내용을 입력해주세요."
             value={context || ""}
             onChange={onChangeContext}
-          ></textarea>
-        </div>
-      </div>
-      <div className="noticeWriteBtnBox">
-        <button className="noticeWriteCompleteBtn" onClick={onClick}>
-          작성 완료
-        </button>
-      </div>
+          />
+        </ContentBox>
+      </Container>
+      <BtnBox>
+        <CompleteBtn onClick={onClick}>작성 완료</CompleteBtn>
+      </BtnBox>
     </>
   );
 };
